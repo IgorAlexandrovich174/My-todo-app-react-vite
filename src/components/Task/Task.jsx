@@ -1,5 +1,6 @@
 import { formatDistanceToNow } from "date-fns";
 import PropTypes from "prop-types";
+import Timer from "../Timer/Timer.jsx";
 
 export default function Task({
   task,
@@ -16,10 +17,12 @@ export default function Task({
           type="checkbox"
           checked={task.completed}
           onChange={() => toggleTask(task.id)}
-          // autoFocus
         />
         <label>
-          <span className="description">{task.text}</span>
+          <span className="title">{task.text}</span>
+          <span className="description">
+            <Timer />
+          </span>
           <span className="created ">
             {formatDistanceToNow(task.created, {
               includeSeconds: true,
