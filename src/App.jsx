@@ -7,13 +7,15 @@ export default function App() {
   const [tasks, setTasks] = useState([]);
   const [filter, setFilter] = useState("all");
 
-  function addNewTask(text) {
+  function addNewTask(text, leftTime) {
     const newTask = {
       id: Date.now(),
       text,
       completed: false,
       editing: false,
       created: new Date(),
+      startTime: null,
+      leftTime,
     };
     setTasks([...tasks, newTask]);
   }
@@ -34,10 +36,8 @@ export default function App() {
     );
   }
 
-  function updateTask(id, newText) {
-    setTasks(
-      tasks.map((task) => (task.id === id ? { ...task, text: newText } : task)),
-    );
+  function updateTask(id, updateTask) {
+    setTasks(tasks.map((task) => (task.id === id ? updateTask : task)));
   }
 
   function deleteTask(id) {

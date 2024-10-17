@@ -21,7 +21,7 @@ export default function Task({
         <label>
           <span className="title">{task.text}</span>
           <span className="description">
-            <Timer />
+            <Timer task={task} updateTask={updateTask} />
           </span>
           <span className="created ">
             {formatDistanceToNow(task.created, {
@@ -42,14 +42,15 @@ export default function Task({
           className="edit"
           type="text"
           value={task.text}
-          onChange={(event) => updateTask(task.id, event.target.value)}
+          onChange={(event) =>
+            updateTask(task.id, { ...task, text: event.target.value })
+          }
           onKeyDown={(event) => {
             if (event.key === "Enter") {
               if (task.text.trim() === "") return deleteTask(task.id);
               editTask(task.id);
             }
           }}
-          // autoFocus
         />
       )}
     </>
